@@ -1,0 +1,28 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+#display {
+	width:262px;
+	font-size: 16px;
+	text-align: right;
+}
+
+.buttons {
+	width: 270px;	
+}
+
+.button {
+	width:50px;	
+	margin-top: 4px;
+	border: 1px solid #000;
+}
+
+
+.eq {
+	width: 158px;
+	background-color: #05ae31;
+}
+
+.op {
+	background-color: #03abf1;
+}

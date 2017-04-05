@@ -1,0 +1,137 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JavaScript Calculator</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<script>
+		function calculate(source)
+		{
+			var display = document.getElementById("display");
+			
+			if (source.id == "=")
+			{
+				display.value = eq(display.value);
+				return;
+			}else if (source.id == "c")
+			{
+				display.value = "";
+				return;
+			}
+			
+			if (!isNumeric(source.id))
+			{
+				if (CountNonNumeric(display.value) > 0)
+				{
+					return;
+				}	
+			}
+			
+			display.value += source.id;	
+		}
+		
+		function eq(input)
+		{
+			var a = "";
+			var b = "";
+			var operator = "";
+			var flag;
+			
+			for (var i = 0, len = input.length; i < len; i++) {
+				if (!isNumeric((input[i])))
+				{
+					flag = true;
+					operator = input[i];
+					continue;
+				}
+				
+				if (!flag) {
+					a += input[i];
+				}else{
+					b += input[i];
+				}
+			}
+			
+			a = parseFloat(a);
+			b = parseFloat(b);
+			var result = 0;
+			
+			if (operator == "+")
+			{
+				result = a + b;
+			}else if (operator == "-")
+			{
+				result = a - b;
+			}else if (operator == "/")
+			{
+				result = a / b;
+			}else if (operator == "x")
+			{
+				result = a * b;
+			}else if (operator == "%")
+			{
+				return (a / 10) * b;
+			}
+			
+			return result;
+		}
+		
+		function CountNonNumeric(input)
+		{
+				
+			var count = 0;
+			for (var i = 0, len = input.length; i < len; i++) {
+				if (!isNumeric(input[i]))
+				{
+					count ++;
+				}
+			}
+			
+			return count;		
+		}
+		
+		function isNumeric(n) {
+			if (n == ".")
+			{
+				return true;
+			}
+			return !isNaN(parseFloat(n)) && isFinite(n);
+		}
+	</script>
+    
+	<div style="width: 300px; float: left;">
+		<input type="text" id="display" name="display" readonly="on"/>
+		<div class="buttons">
+			<input class="button" type="button" id="7" value="7" onClick="calculate(this);"/>
+			<input class="button" type="button" id="8" value="8" onClick="calculate(this);"/>
+			<input class="button" type="button" id="9" value="9" onClick="calculate(this);"/>
+			<input class="button op" type="button" id="+" value="+" onClick="calculate(this);"/>
+			<input class="button op" type="button" id="%" value="%" onClick="calculate(this);"/>
+			
+			<input class="button" type="button" id="4" value="4" onClick="calculate(this);"/>
+			<input class="button" type="button" id="5" value="5" onClick="calculate(this);"/>
+			<input class="button" type="button" id="6" value="6" onClick="calculate(this);"/>
+			<input class="button op" type="button" id="-" value="-" onClick="calculate(this);"/>
+			<input class="button op" type="button" id="x" value="x" onClick="calculate(this);"/>
+			
+			<input class="button" type="button" id="1" value="1" onClick="calculate(this);"/>
+			<input class="button" type="button" id="2" value="2" onClick="calculate(this);"/>
+			<input class="button" type="button" id="3" value="3" onClick="calculate(this);"/>
+			<input class="button op" type="button" id="/" value="/" onClick="calculate(this);"/>
+			
+			<input class="button" type="button" id="." value="." onClick="calculate(this);"/>
+			<input class="button" type="button" id="0" value="0" onClick="calculate(this);"/>
+			<input class="button eq" type="button" id="=" value="=" onClick="calculate(this);"/>
+			<input class="button op" type="button" id="c" value="C" onClick="calculate(this);"/>
+		</div>
+	</div>
+	
+	<div style="float: left;">
+		<b>JavaScript Számológép</b><br />
+		Képes az alapműveleteket két egész számmal elvégezni.
+	</div>
+</body>
+</html>
